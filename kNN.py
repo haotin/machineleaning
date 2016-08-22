@@ -7,6 +7,8 @@ def createDataSet():
     labels = ['A','A','B','B']
     return group,labels
 
+group,labels=createDataSet()
+
 
 def classify0(inX,dataSet,labels,k):
     dataSetSize = dataSet.shape[0]
@@ -19,5 +21,11 @@ def classify0(inX,dataSet,labels,k):
     for i in range(k):
         voteIlabel = labels[sortedDistIndicies[i]]
         classCount[voteIlabel]=classCount.get(voteIlabel,0)+1
-        sortedClassCount = sorted(classCount.iteritems(),key=operator.itemgetter(1),reversed=True)
+        sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1))
     return sortedClassCount[0][0]
+
+
+
+classify0([0.2,0.1],group,labels,3)
+
+print (classify0([0.2,0.1],group,labels,3))
