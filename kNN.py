@@ -1,4 +1,3 @@
-#knn
 from numpy import *
 import operator
 
@@ -7,9 +6,9 @@ def createDataSet():
     labels = ['A','A','B','B']
     return group,labels
 
-group,labels=createDataSet()
 
 
+#分类器具体算法
 def classify0(inX,dataSet,labels,k):
     dataSetSize = dataSet.shape[0]
     diffMat = tile(inX,(dataSetSize,1))-dataSet
@@ -25,7 +24,10 @@ def classify0(inX,dataSet,labels,k):
     return sortedClassCount[0][0]
 
 
+def file2matrix():
+    
 
-classify0([0.2,0.1],group,labels,3)
-
+'''
+group,labels=createDataSet()
 print (classify0([0.2,0.1],group,labels,3))
+'''
