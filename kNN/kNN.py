@@ -9,8 +9,6 @@ def createDataSet():
     labels = ['A','A','B','B']
     return group,labels
 
-
-
 #分类器具体算法
 def classify0(inX,dataSet,labels,k):
     dataSetSize = dataSet.shape[0]
@@ -44,7 +42,42 @@ def file2matrix(filename):
 
 #数据归一话处理
 def autoNorm(dataSet):
-    
+    minVas = dataSet.min(0)
+    maxVas = dataSet.max(0)
+    ranges = maxVas - minVas
+    normDataSet = zeros(shape(dataSet))
+    m = dataSet.shape[0]
+    normDataSet = dataSet-tile(minVas,(m,1))
+    normDataSet = normDataSet/tile(ranges,(m,1))
+    return normDataSet ,ranges,minVas
+
+def datingClassTest():
+    hoRatio = 0.10
+    datingDataMat, datingLabels = file2matrix('datingTestSet2.txt')
+    normDataSet ,ranges,minVas = autoNorm(datingDataMat)
+    m = normDataSet.shape[0]
+    numTestVecs = int(m*hoRatio)
+    errorCount = 0
+    for i in range(numTestVecs):
+        classfileResult = classify0(normDataSet[i,:], normDataSet[numTestVecs:m,:], datingLabels[numTestVecs:m],3)
+        #print ('the class came back with: %d,the real is :%d' %(classfileResult,datingLabels[i]))
+        if (classfileResult != datingLabels[i]): errorCount += 1
+    #print ('the total error rate is :%f '%(errorCount/float(numTestVecs)))
+
+
+def classfyPerson():
+    resultList = ['not at all','in small doses', 'in large doses']
+    percentTats = float(input('percentage of time spent playing video games?'))
+    ffMiles = float(input('frequent flier milse earned per year?'))
+    icecream = float(input('liters of ice cream consumed per year?'))
+    datingDataMat,datingLabels = file2matrix('datingTestSet2.txt')
+    normMat,ranges,minVas = autoNorm(datingDataMat)
+    inArr = array([ffMiles,percentTats,icecream])
+    classifierResult = classify0((inArr - minVas)/ranges, normMat,datingLabels,3)
+    print ("you will probably like this person:", resultList[classifierResult-1])
+
+#datingClassTest()
+classfyPerson()
 
 
 '''
@@ -54,6 +87,7 @@ print (classify0([0.2,0.1],group,labels,3))
 
 #matplot测试
 datingDataMat,datingLabels = file2matrix('datingTestSet2.txt')
+datingDataMat = autoNorm(datingDataMat)
 print (datingDataMat,datingLabels)
 fig = plt.figure()
 ax = fig.add_subplot(111)
