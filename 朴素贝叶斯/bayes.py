@@ -1,3 +1,5 @@
+from numpy import *
+
 #词表到向量的转化函数
 def loadDataSet():
     postingList = [['my', 'dog', 'has', 'flea', 'problems', 'help', 'please'],
@@ -25,8 +27,27 @@ def setOfWord2Vec(vocabList,inputSet):
     return returnVec
 
 
-
+'''
 postingList,classVec = loadDataSet()
 vocabSet = createVocabList(postingList)
 data=setOfWord2Vec(vocabSet,postingList[0])
 print (data)
+'''
+#朴素贝叶斯分类器训练函数
+def trainNB0(trainMatrix,trainCategory):
+    numTrainDocs = len(trainMatrix)
+    numWords = len(trainMatrix[0])
+    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    p0Num = zeros(numWords); p1Num = zeros(numWords)
+    p0Denom = 0.0; p1Denom = 0.0
+    for i in range(numTrainDocs):
+        if trainCategory[i] ==1:
+            p1Num += trainMatrix[i]
+            p1Denom += sum(trainMatrix[i])
+        else:
+            p0Num += trainMatrix[i]
+            p0Denom += sum(trainMatrix[i])
+    p1Vect = p1Num/p1Denom  #change to log()
+    p0Vect = p0Num/p1Denom  #change to log()
+    return p0Vect,p1Vect,pAbusive
+
