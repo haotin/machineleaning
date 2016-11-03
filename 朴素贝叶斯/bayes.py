@@ -17,7 +17,7 @@ def createVocabList(dataSet):
         vocabSet =vocabSet| set(document)#创建两个集合的并集
     return list(vocabSet)
 
-#
+
 def setOfWord2Vec(vocabList,inputSet):
     returnVec = [0]*len(vocabList)
     for word in inputSet:
