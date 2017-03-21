@@ -90,4 +90,5 @@ dataSet,labels = createDateSet()
 #ShannonEnt = calcShannonEnt(dataSet)
 #retdataSet = splitDataSet(dataSet, 0,1)
 bestFeature = chooseBestFeatureToSplit(dataSet)
+
 '''
