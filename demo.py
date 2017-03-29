@@ -10,7 +10,7 @@ dataSet = [[1,1,'yes'],
 
 print(dataSet[0])
 
-print dataSet
+
 
 '''
 from math import  log
