@@ -11,7 +11,11 @@ dataSet = [[1,1,'yes'],
 print(dataSet[0])
 
 
+<<<<<<< HEAD
 # master 的分支
+=======
+# branch3
+>>>>>>> branch3
 '''
 from math import  log
 def creatdataSet():
