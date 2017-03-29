@@ -11,7 +11,7 @@ dataSet = [[1,1,'yes'],
 print(dataSet[0])
 
 
-
+# master 的分支
 '''
 from math import  log
 def creatdataSet():
